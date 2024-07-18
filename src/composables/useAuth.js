@@ -11,13 +11,14 @@ export const useAuth = () => {
   const route = useRoute()
   const router = useRouter()
 
-  const clientId = import.meta.env.VUE_APP_SPOTIFY_CLIENT_ID
+  const clientId = import.meta.env.VITE_API_SPOTIFY_CLIENT_ID
   const redirectUri = 'http://localhost:5173/callback'
 
   // Get token
   const getToken = async (code) => {
     const codeVerifier = localStorage.getItem('code_verifier')
     const url = 'https://accounts.spotify.com/api/token' // Added correct URL
+
 
     const payload = {
       method: 'POST',
@@ -76,7 +77,7 @@ export const useAuth = () => {
 
   // Log in
   const login = async () => {
-    console.log('test')
+    console.log('test', clientId)
     const scope =
       'user-read-private user-read-email playlist-read-private playlist-modify-public user-read-recently-played user-top-read'
     const authUrl = new URL('https://accounts.spotify.com/authorize')

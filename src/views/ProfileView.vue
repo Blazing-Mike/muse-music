@@ -22,7 +22,7 @@ onMounted(async () => {
   </div>
 
   <div class="profile-text">
-    <h1>{{ profile.display_name }}</h1>
+    <h1>{{ profile?.display_name }}</h1>
     
     </div>
 
