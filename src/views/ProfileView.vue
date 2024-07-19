@@ -2,15 +2,19 @@
 import { onMounted, ref } from 'vue'
 import { useSpotifyApi } from '../composables/useSpotifyApi'
 
-const { getTopTracks, getProfile } = useSpotifyApi()
+const { getTopTracks, getProfile, getUserPlaylists } = useSpotifyApi()
 const topTracks = ref([])
 const profile = ref(null)
 const profileImage = ref(null)
+const playlists = ref([])
+const playlistCount = ref(0)
 
 onMounted(async () => {
   topTracks.value = await getTopTracks()
   profile.value = await getProfile()
   profileImage.value = profile.value.images[1].url
+  playlists.value = await getUserPlaylists()
+  playlistCount.value = playlists.value.length
 })
 </script>
 
@@ -23,8 +27,13 @@ onMounted(async () => {
 
   <div class="profile-text">
     <h1>{{ profile?.display_name }}</h1>
-    
+
+    <div class="flex-align-center gap-1">
+      <p>Followers: {{ profile?.followers.total }}</p>
+      <p>{{ playlistCount }} Public playlist</p>
+      <a :href="profile?.external_urls.spotify" class="" target="_blank">{{ profile?.id }}</a>
     </div>
+  </div>
 
   <div class="about">
     <ul v-if="topTracks?.length">
@@ -67,10 +76,9 @@ onMounted(async () => {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-
   }
 
-  .profile-text{
+  .profile-text {
     margin: 3rem;
   }
 }

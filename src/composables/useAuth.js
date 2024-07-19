@@ -7,7 +7,7 @@ export const useAuth = () => {
   const spotifyCode = ref(null)
   const token = ref(localStorage.getItem('access_token') || null)
   const user = ref(null)
-  const isAuthenticated = ref(!!localStorage.getItem('access_token') || '');
+  const isAuthenticated = ref(!!localStorage.getItem('access_token') || '')
   const route = useRoute()
   const router = useRouter()
 
@@ -18,7 +18,6 @@ export const useAuth = () => {
   const getToken = async (code) => {
     const codeVerifier = localStorage.getItem('code_verifier')
     const url = 'https://accounts.spotify.com/api/token' // Added correct URL
-
 
     const payload = {
       method: 'POST',
@@ -79,7 +78,7 @@ export const useAuth = () => {
   const login = async () => {
     console.log('test', clientId)
     const scope =
-      'user-read-private user-read-email playlist-read-private playlist-modify-public user-read-recently-played user-top-read'
+      'user-read-private user-read-email playlist-read-private playlist-modify-public user-read-recently-played user-top-read user-follow-read user-library-modify user-library-read'
     const authUrl = new URL('https://accounts.spotify.com/authorize')
 
     const generateRandomString = (length) => {
@@ -126,7 +125,7 @@ export const useAuth = () => {
     localStorage.removeItem('access_token')
     token.value = ''
     isAuthenticated.value = false
-    router.push('/')
+    router.push({ path: '/' })
   }
 
   return {
