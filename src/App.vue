@@ -6,18 +6,17 @@ import { useAuth } from './composables/useAuth'
 const { login, spotifyCode, token, getToken, isAuthenticated, logout } = useAuth()
 const route = useRoute()
 
+
 const handleSpotifyAuth = async () => {
   const code = route.query.code
   if (code) {
     spotifyCode.value = code
     token.value = await getToken(code)
-    console.log('token.value:', token.value)
-  } else if (isAuthenticated) {
-    console.log('isAuthenticated:', isAuthenticated.value)
   }
 }
 
 onMounted(handleSpotifyAuth)
+
 
 watch(
   () => route.query.code,
@@ -50,7 +49,6 @@ header {
   background-color: #000;
   color: white;
   padding: 30px 3rem;
-
 }
 header,
 nav {

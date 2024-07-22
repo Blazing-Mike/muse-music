@@ -5,7 +5,6 @@ import { fetchWebApi } from '../utils/fetchWebApi'
 export function useSpotifyApi() {
   const getTopTracks = async () => {
     const response = await fetchWebApi('v1/me/top/tracks?time_range=long_term&limit=5', 'GET')
-    console.log(response.items)
     return response.items
   }
 
@@ -16,12 +15,31 @@ export function useSpotifyApi() {
 
   const getUserPlaylists = async () => {
     const response = await fetchWebApi(`v1/me/playlists/`, 'GET')
-    const filteredPLaylists = response.items.filter((playlist) => playlist.owner.display_name === 'Mikeoxygen')
+    const filteredPLaylists = response.items.filter(
+      (playlist) => playlist.owner.display_name === 'Mikeoxygen'
+    )
     return filteredPLaylists
   }
 
-  const fetchUserPlaylists = async () => {
-    // Fetch playlists from Spotify
+  const getRecentlyPlayed = async () => {
+    const response = await fetchWebApi('v1/me/player/recently-played', 'GET')
+    return response
+  }
+
+  const topTracksIds = [
+    '5KV5UXd1uNZZafWTudrVft',
+    '6gyTRQ20O9FVRHsLBQMJ6x',
+    '007i2QN59ZGOgiUujuktFp',
+    '1IMRi5UVOV77PsAgdWDvzh',
+    '1fFixJPR0ZXgpm1b8DeL7g'
+  ]
+
+  const getRecommendedTracks = async () => {
+    const response = await fetchWebApi(
+      `v1/recommendations?limit=5&seed_tracks=${topTracksIds.join(',')}`,
+      'GET'
+    )
+    return response.tracks
   }
 
   const fetchLikedSongs = async () => {
@@ -33,11 +51,12 @@ export function useSpotifyApi() {
   }
 
   return {
-    fetchUserPlaylists,
     fetchLikedSongs,
     createPlaylist,
     getTopTracks,
     getProfile,
-    getUserPlaylists
+    getUserPlaylists,
+    getRecentlyPlayed,
+    getRecommendedTracks
   }
 }

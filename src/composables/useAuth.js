@@ -76,7 +76,6 @@ export const useAuth = () => {
 
   // Log in
   const login = async () => {
-    console.log('test', clientId)
     const scope =
       'user-read-private user-read-email playlist-read-private playlist-modify-public user-read-recently-played user-top-read user-follow-read user-library-modify user-library-read'
     const authUrl = new URL('https://accounts.spotify.com/authorize')
