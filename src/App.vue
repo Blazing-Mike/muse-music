@@ -6,7 +6,6 @@ import { useAuth } from './composables/useAuth'
 const { login, spotifyCode, token, getToken, isAuthenticated, logout } = useAuth()
 const route = useRoute()
 
-
 const handleSpotifyAuth = async () => {
   const code = route.query.code
   if (code) {
@@ -16,7 +15,6 @@ const handleSpotifyAuth = async () => {
 }
 
 onMounted(handleSpotifyAuth)
-
 
 watch(
   () => route.query.code,
@@ -30,7 +28,9 @@ watch(
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="35" height="35" />
+    <RouterLink to="/">
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="35" height="35" />
+    </RouterLink>
 
     <div class="wrapper">
       <nav>
