@@ -32,7 +32,10 @@ const framestyleObject = reactive({
       </ul>
     </div>
 
-    <div class=""><h2 class="heading">My Playlists</h2></div>
+    <div class="flex-align-center between w-90 ">
+      <h2 class="heading">My Playlists</h2>
+      <a href="/playlists" class="">show all</a>
+    </div>
 
     <div class="flex">
       <ul v-if="userPlaylists?.length">
@@ -57,7 +60,7 @@ const framestyleObject = reactive({
 
 <style scoped>
 .heading {
-  margin: 2rem 0 1rem 4rem;
+  margin: 0 0 0 4rem;
   font-weight: 600;
   font-size: 2rem;
 }
