@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import MusePlayer from './components/MusePlayer.vue'
 import { useAuth } from './composables/useAuth'
 
 const { login, spotifyCode, token, getToken, isAuthenticated, logout } = useAuth()
@@ -42,6 +43,10 @@ watch(
   </header>
 
   <RouterView />
+
+  <div class="player-container">
+    <MusePlayer />
+  </div>
 </template>
 
 <style scoped>
@@ -59,5 +64,13 @@ nav {
 
 nav {
   gap: 10px;
+}
+
+.player-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  padding: 20px;
 }
 </style>

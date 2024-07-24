@@ -7,7 +7,6 @@ export const fetchWebApi = async (endpoint, method, params=null) => {
     if (!token.value) {
       throw new Error('Access token is missing')
     }
-
     const response = await fetch(`https://api.spotify.com/${endpoint}`, {
       method: method,
       headers: {

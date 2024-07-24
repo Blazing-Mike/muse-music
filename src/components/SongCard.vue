@@ -5,15 +5,15 @@ defineProps({
     required: true
   }
 })
-
-
 </script>
 
 <template>
   <div class="song-card">
     <div class="song-card__image">
+      <button class="play">play</button>
       <img :src="track.album.images[0].url" alt="Album cover" />
     </div>
+
     <div class="song-card__info">
       <h3>{{ track.name }}</h3>
       <p>{{ track.artists[0].name }}</p>
@@ -31,6 +31,7 @@ defineProps({
 }
 
 .song-card__image {
+  position: relative;
   margin-right: 1rem;
 }
 
@@ -45,4 +46,10 @@ defineProps({
   margin: 0;
 }
 
+.play {
+  position: absolute;
+  display: block;
+  bottom: 10px;
+  right: 10px;
+}
 </style>

@@ -1,16 +1,25 @@
 <script setup>
 import PlaylistCard from '@/components/PlaylistCard.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import SongCard from '../components/SongCard.vue'
 import { useSpotifyApi } from '../composables/useSpotifyApi'
 
 const { getRecommendedTracks, getUserPlaylists } = useSpotifyApi()
 const recommendedTracks = ref([])
 const userPlaylists = ref([])
+const iframeURL = ref(
+  'https://open.spotify.com/embed/playlist/2cWJyJQ079pXm40JoOGie3?utm_source=generator&theme=0`'
+)
 onMounted(async () => {
   recommendedTracks.value = await getRecommendedTracks()
   userPlaylists.value = await getUserPlaylists()
   userPlaylists.value = userPlaylists.value.slice(0, 5)
+})
+
+const framestyleObject = reactive({
+  minHeight: '360px',
+  width: '90%',
+  margin: '0 auto'
 })
 </script>
 
@@ -30,6 +39,19 @@ onMounted(async () => {
         <PlaylistCard v-for="playlist in userPlaylists" :key="playlist.id" :playlist="playlist" />
       </ul>
     </div>
+
+    <div class="frame">
+      <iframe
+        title="Spotify Embed: Recommendation Playlist "
+        :src="iframeURL"
+        width="100%"
+        height="100%"
+        :style="framestyleObject"
+        frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      />
+    </div>
   </main>
 </template>
 
@@ -47,6 +69,11 @@ main {
   margin-top: 2rem;
 }
 
+.frame {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
 ul {
   display: flex;
 }
