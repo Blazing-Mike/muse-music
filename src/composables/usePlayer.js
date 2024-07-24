@@ -1,23 +1,33 @@
-import { ref } from 'vue'
-import { fetchWebApi } from '../utils/fetchWebApi'
+// src/composables/usePlayer.js
+
+import { ref } from 'vue';
 
 export function usePlayer() {
-  const isPlaying = ref(false)
-  const currentTrack = ref(null)
+  const isPlaying = ref(false);
+  const currentTrack = ref(null);
+  const audio = ref(new Audio());
+  const progress = ref(0);
 
-  const getPlayBackState = async () => {
-    const response = await fetchWebApi(`v1/me/player`, 'GET')
-    return response
-  }
+  const playTrack = (track) => {
+    if (currentTrack.value?.id !== track.id) {
+      currentTrack.value = track;
+      audio.value.src = track.preview_url;
+      audio.value.play();
+      isPlaying.value = true;
+    } else {
+      audio.value.play();
+      isPlaying.value = true;
+    }
+  };
 
-  const play = (trackUri = '') => {
-    // Play a track using Spotify API
-    return trackUri
-  } 
+  const pauseTrack = () => {
+    audio.value.pause();
+    isPlaying.value = false;
+  };
 
-  const pause = () => {
-    // Pause playback using Spotify API
-  }
+  audio.value.ontimeupdate = () => {
+    progress.value = (audio.value.currentTime / audio.value.duration) * 100;
+  };
 
-  return { isPlaying, currentTrack, play, pause, getPlayBackState }
+  return { isPlaying, currentTrack, progress, playTrack, pauseTrack };
 }

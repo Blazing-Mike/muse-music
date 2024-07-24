@@ -1,4 +1,7 @@
 <script setup>
+import { usePlayerStore } from '../stores/playerStore';
+const { playTrack } = usePlayerStore();
+
 defineProps({
   track: {
     type: Object,
@@ -10,7 +13,7 @@ defineProps({
 <template>
   <div class="song-card">
     <div class="song-card__image">
-      <button class="play">play</button>
+      <button @click="playTrack(track)">Play</button>
       <img :src="track.album.images[0].url" alt="Album cover" />
     </div>
 
