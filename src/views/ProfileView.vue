@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useSpotifyApi } from '../composables/useSpotifyApi'
 
 const { getTopTracks, getProfile, getUserPlaylists } = useSpotifyApi()
@@ -8,6 +8,9 @@ const profile = ref(null)
 const profileImage = ref(null)
 const playlists = ref([])
 const playlistCount = ref(0)
+const iframeURL = ref(
+  'https://open.spotify.com/embed/playlist/2cWJyJQ079pXm40JoOGie3?utm_source=generator&theme=0`'
+)
 
 onMounted(async () => {
   topTracks.value = await getTopTracks()
@@ -15,6 +18,12 @@ onMounted(async () => {
   profileImage.value = profile.value.images[1].url
   playlists.value = await getUserPlaylists()
   playlistCount.value = playlists.value.length
+})
+
+const framestyleObject = reactive({
+  minHeight: '360px',
+  width: '100%',
+  margin: '0 auto'
 })
 </script>
 
@@ -36,16 +45,26 @@ onMounted(async () => {
   </div>
 
   <div class="about">
-    <ul v-if="topTracks?.length">
-      <li v-for="track in topTracks" :key="track.id" class="list-item">{{ track.name }}</li>
-    </ul>
+    <div class="frame">
+      <iframe
+        title="Spotify Embed: Recommendation Playlist "
+        :src="iframeURL"
+        width="100%"
+        height="100%"
+        :style="framestyleObject"
+        frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      />
+    </div>
   </div>
 </template>
 
 <style>
-@media (min-width: 1024px) {
+
   .about {
-    min-height: 100vh;
+    min-width: 20rem;
+    margin: 2rem;
     display: flex;
     align-items: center;
   }
@@ -58,7 +77,7 @@ onMounted(async () => {
   .profile-section {
     position: relative;
     padding: 170px 0;
-    background: rgba(255, 255, 255, 0.3);
+    background: hsla(160, 100%, 37%, 1);
     width: 100%;
   }
 
@@ -81,5 +100,5 @@ onMounted(async () => {
   .profile-text {
     margin: 3rem;
   }
-}
+
 </style>

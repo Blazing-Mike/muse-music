@@ -1,5 +1,6 @@
 <script setup>
 import { usePlayerStore } from '../stores/playerStore';
+import IconPlay from './icons/IconPlay.vue';
 const { playTrack } = usePlayerStore();
 
 defineProps({
@@ -13,7 +14,7 @@ defineProps({
 <template>
   <div class="song-card">
     <div class="song-card__image">
-      <button @click="playTrack(track)">Play</button>
+      <IconPlay class="play" @click="playTrack(track)" />
       <img :src="track.album.images[0].url" alt="Album cover" />
     </div>
 
@@ -47,12 +48,12 @@ defineProps({
 
 .song-card__info h3 {
   margin: 0;
+  color: white;
 }
 
 .play {
   position: absolute;
-  display: block;
-  bottom: 10px;
-  right: 10px;
+  bottom: 40%;
+  left: 30%;
 }
 </style>

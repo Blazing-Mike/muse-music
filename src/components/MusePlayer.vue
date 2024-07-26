@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { usePlayerStore } from '../stores/playerStore'
 
-const { isPlaying, currentTrack, progress, playTrack, pauseTrack, getUsersQueue } = usePlayerStore()
+const { isPlaying, currentTrack, currentTrackIndex, progress, playTrack, pauseTrack, getUsersQueue, playNextTrack, playPrevTrack } = usePlayerStore()
 const playButtonLabel = computed(() => (isPlaying.value ? 'Pause' : 'Play'))
 const artists = computed(() => (currentTrack.value ? currentTrack.value.artists : []))
 const playerImage = computed(() => (currentTrack.value ? currentTrack.value.album.images[2] : ''))
@@ -37,7 +37,7 @@ onMounted(async () => {
       </li>
     </ul>
   </div>
-  <div class="player flex-align-center gap-2" v-if="currentTrack">
+  <div class="player flex-align-center flex-wrap gap-2" v-if="currentTrack">
     <div class="track-item flex-align-center gap-1">
       <div class="song-card__image">
         <img :src="playerImage.url" alt="Album cover" class="player-image" />
@@ -51,10 +51,16 @@ onMounted(async () => {
         </div>
       </div>
     </div>
+
+    <button @click="playPrevTrack" :disabled="currentTrackIndex <= 0">Previous</button>
+
+    <button @click="isPlaying ? pauseTrack() : playTrack(currentTrack)">
+      {{ playButtonLabel }}
+    </button>
+
+    <button @click="playNextTrack">Next</button>
+
     <div class="controls">
-      <button @click="isPlaying ? pauseTrack() : playTrack(currentTrack)">
-        {{ playButtonLabel }}
-      </button>
       <div class="flex-align-center gap-1">
         <span>0:00</span>
         <div class="progress-bar">
@@ -87,10 +93,16 @@ onMounted(async () => {
 }
 
 .progress-bar {
-  width: 500px;
+  min-width: 100%;
   height: 5px;
   background-color: #ddd;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .progress-bar {
+    min-width: 400px;
+  }
 }
 
 .progress {

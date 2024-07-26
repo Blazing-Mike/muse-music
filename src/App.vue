@@ -30,19 +30,21 @@ watch(
 <template>
   <header>
     <RouterLink to="/">
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="35" height="35" />
+      <h1 class="logo">Muse</h1>
     </RouterLink>
 
     <div class="wrapper">
       <nav>
         <RouterLink to="/profile">Profile</RouterLink>
-        <button @click="login" v-if="!isAuthenticated">Log In</button>
-        <button @click="logout" v-if="isAuthenticated">Log Out</button>
+        <button @click="login" v-if="!isAuthenticated" class="log-in nav-btn">Log In</button>
+        <button @click="logout" v-if="isAuthenticated" class="log-out nav-btn">Log Out</button>
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
 
   <div class="player-container">
     <MusePlayer />
@@ -71,6 +73,36 @@ nav {
   bottom: 0;
   width: 100%;
   background: #000;
-  padding: 20px;
+  padding: 10px 20px;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.log-out {
+  background: red;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.log-in {
+  background: green;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+main {
+  min-height: 100vh;
+  margin-bottom: 2rem;
 }
 </style>
