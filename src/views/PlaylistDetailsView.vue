@@ -1,5 +1,4 @@
 <script setup>
-import IconPlay from '@/components/icons/IconPlay.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePlayerStore } from '../stores/playerStore'
@@ -55,10 +54,6 @@ const convertmstoMinutes = (ms) => {
   <div class="playlist mx-auto w-80">
     <div class="flex flex-wrap gap-2 playlist-info">
       <div class="cover-container">
-        <IconPlay
-          class="play-icon"
-          @click="playTrackFromPlaylist(playlist?.tracks?.items[0].track, index)"
-        />
         <img :src="playlist?.images[0].url" alt="Playlist cover" class="playlist-cover" />
       </div>
 
@@ -71,6 +66,12 @@ const convertmstoMinutes = (ms) => {
         <p>
           Tracks: <span class="tracks"> {{ playlist?.tracks.total }}</span>
         </p>
+        <button
+          @click="playTrackFromPlaylist(playlist.tracks.items[0].track, 0)"
+          class="btn play-icon"
+        >
+          Play
+        </button>
       </div>
     </div>
 
@@ -165,6 +166,7 @@ li.active {
 
 .track-info {
   flex-direction: column;
+  min-width: 17rem;
 }
 .track-image {
   border-radius: 10px;
@@ -193,7 +195,12 @@ li.active {
 
   .album-title,
   .track-album {
-    display: flex;
+    display: block;
+  }
+
+  .track-album {
+
+    
   }
 
   .album-title {
@@ -204,13 +211,14 @@ li.active {
 .cover-container {
   position: relative;
 }
-.play-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
+
+.btn {
+  background: hsla(160, 100%, 37%, 1);
   color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: transparent;
+  margin-top: 1rem;
 }
 </style>

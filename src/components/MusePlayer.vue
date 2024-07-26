@@ -1,9 +1,22 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue'
 import { usePlayerStore } from '../stores/playerStore'
+import IconNext from './icons/IconNext.vue'
+import IconPause from './icons/IconPause.vue'
+import IconPlay from './icons/IconPlay2.vue'
 
-const { isPlaying, currentTrack, currentTrackIndex, progress, playTrack, pauseTrack, getUsersQueue, playNextTrack, playPrevTrack } = usePlayerStore()
-const playButtonLabel = computed(() => (isPlaying.value ? 'Pause' : 'Play'))
+const {
+  isPlaying,
+  currentTrack,
+  currentTrackIndex,
+  progress,
+  playTrack,
+  pauseTrack,
+  getUsersQueue,
+  playNextTrack,
+  playPrevTrack
+} = usePlayerStore()
+//const playButtonLabel = computed(() => (isPlaying.value ? IconPause : IconPlay))
 const artists = computed(() => (currentTrack.value ? currentTrack.value.artists : []))
 const playerImage = computed(() => (currentTrack.value ? currentTrack.value.album.images[2] : ''))
 const queue = ref([])
@@ -52,13 +65,22 @@ onMounted(async () => {
       </div>
     </div>
 
-    <button @click="playPrevTrack" :disabled="currentTrackIndex <= 0">Previous</button>
-
-    <button @click="isPlaying ? pauseTrack() : playTrack(currentTrack)">
-      {{ playButtonLabel }}
+    <button @click="playPrevTrack" :disabled="currentTrackIndex <= 0" class="prev-button">
+      <IconNext />
     </button>
 
-    <button @click="playNextTrack">Next</button>
+    <button @click="isPlaying ? pauseTrack() : playTrack(currentTrack)" class="play-button">
+      <div v-if="isPlaying">
+        <IconPause />
+      </div>
+      <div v-else>
+        <IconPlay />
+      </div>
+    </button>
+
+    <button @click="playNextTrack" class="next-bttuon">
+      <IconNext />
+    </button>
 
     <div class="controls">
       <div class="flex-align-center gap-1">
@@ -115,5 +137,18 @@ onMounted(async () => {
   right: 0;
   height: 600px;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.play-button,
+.next-bttuon,
+.prev-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.prev-button {
+  transform: rotate(180deg);
 }
 </style>

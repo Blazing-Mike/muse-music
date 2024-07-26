@@ -26,6 +26,11 @@ export function useSpotifyApi() {
     return response
   }
 
+  const getTopArtists = async () => {
+    const response = await fetchWebApi('v1/me/top/artists?time_range=long_term&limit=6', 'GET')
+    return response.items
+  }
+
   const topTracksIds = [
     '5KV5UXd1uNZZafWTudrVft',
     '6gyTRQ20O9FVRHsLBQMJ6x',
@@ -46,6 +51,12 @@ export function useSpotifyApi() {
     // Fetch liked songs from Spotify
   }
 
+  const search = async (query) => {
+    // Search for tracks on Spotify
+    const response = await fetchWebApi(`v1/search?q=${query.value}&type=artist,album,track`, 'GET');
+    return response
+  }
+
   const createPlaylist = async () => {
     // Create a new playlist on Spotify
   }
@@ -57,6 +68,8 @@ export function useSpotifyApi() {
     getProfile,
     getUserPlaylists,
     getRecentlyPlayed,
-    getRecommendedTracks
+    getRecommendedTracks,
+    getTopArtists, 
+    search
   }
 }

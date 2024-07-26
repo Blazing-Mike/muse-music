@@ -90,6 +90,23 @@ body {
   gap: 0.2rem;
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.mt-3 {
+  margin-top: 3rem;
+}
+
+
 .flex-align-center {
   display: flex;
   align-items: center;
@@ -99,7 +116,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .between {
@@ -126,9 +142,8 @@ body {
   width: 100%;
 }
 
-.w-90{
+.w-90 {
   width: 90%;
-
 }
 
 .w-80 {
@@ -152,6 +167,6 @@ body {
   margin-right: auto;
 }
 
-.flex-wrap{
+.flex-wrap {
   flex-wrap: wrap;
 }

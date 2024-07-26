@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import IconSearch from './components/icons/IconSearch.vue'
 import MusePlayer from './components/MusePlayer.vue'
 import { useAuth } from './composables/useAuth'
 
@@ -35,6 +36,9 @@ watch(
 
     <div class="wrapper">
       <nav>
+        <RouterLink to="/search">
+          <span class="flex-align-center gap-1"> Search <IconSearch /></span></RouterLink>
+        <RouterLink to="/playlists">Playlists</RouterLink>
         <RouterLink to="/profile">Profile</RouterLink>
         <button @click="login" v-if="!isAuthenticated" class="log-in nav-btn">Log In</button>
         <button @click="logout" v-if="isAuthenticated" class="log-out nav-btn">Log Out</button>
@@ -55,13 +59,14 @@ watch(
 header {
   background-color: #000;
   color: white;
-  padding: 30px 3rem;
+  padding: 15px 3rem;
 }
 header,
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 1.2rem;
 }
 
 nav {
@@ -91,13 +96,13 @@ nav {
 
 .log-out {
   background: red;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border-radius: 5px;
 }
 
 .log-in {
   background: green;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border-radius: 5px;
 }
 
