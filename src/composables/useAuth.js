@@ -12,7 +12,7 @@ export const useAuth = () => {
   const router = useRouter()
 
   const clientId = import.meta.env.VITE_API_SPOTIFY_CLIENT_ID
-  const redirectUri = 'http://localhost:5173/callback'
+  const redirectUri = import.meta.env.VITE_API_SPOTIFY_REDIRECT_URI
 
   // Get token
   const getToken = async (code) => {
