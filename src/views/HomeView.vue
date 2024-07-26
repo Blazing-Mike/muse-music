@@ -55,7 +55,7 @@ onMounted(async () => {
 
     <section v-else class="hero">
       <h1>Muse Music</h1>
-      <p class="log-in-statement">Please log in to view your recommended tracks and playlists.</p>
+      <p class="log-in-statement">Please log in to explore muse</p>
     </section>
   </main>
 </template>
