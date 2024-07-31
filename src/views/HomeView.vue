@@ -31,7 +31,7 @@ onMounted(async () => {
         </ul>
       </div>
 
-      <div class="flex-align-center between w-90">
+      <div class="flex-align-center between w-90 gap-2">
         <h2 class="heading">My Playlists</h2>
         <a href="/playlists" class="">show all</a>
       </div>
@@ -67,12 +67,20 @@ onMounted(async () => {
   font-weight: 600;
   font-size: 2rem;
 }
+
+
 main {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 0 2rem;
   margin: 2rem 0;
+}
+
+@media (min-width: 768px){
+  main {
+  padding: 0 2rem;
+
+}
 }
 
 .frame {

@@ -37,7 +37,8 @@ watch(
     <div class="wrapper">
       <nav>
         <RouterLink to="/search">
-          <span class="flex-align-center gap-1"> Search <IconSearch /></span></RouterLink>
+          <span class="flex-align-center gap-1"> Search <IconSearch /></span
+        ></RouterLink>
         <RouterLink to="/playlists">Playlists</RouterLink>
         <RouterLink to="/profile">Profile</RouterLink>
         <button @click="login" v-if="!isAuthenticated" class="log-in nav-btn">Log In</button>
@@ -59,7 +60,7 @@ watch(
 header {
   background-color: #000;
   color: white;
-  padding: 15px 3rem;
+  padding: 20px 3rem;
 }
 header,
 nav {
@@ -67,6 +68,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   font-size: 1.2rem;
+  flex-wrap: wrap;
 }
 
 nav {
