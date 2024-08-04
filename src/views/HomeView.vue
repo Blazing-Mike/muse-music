@@ -25,10 +25,8 @@ onMounted(async () => {
   <main>
     <section class="" v-if="isAuthenticated">
       <div class=""><h2 class="heading">Recommended tracks</h2></div>
-      <div class="flex">
-        <ul v-if="recommendedTracks?.length">
-          <SongCard v-for="track in recommendedTracks" :key="track.id" :track="track" />
-        </ul>
+      <div class="flex" v-if="recommendedTracks?.length">
+        <SongCard v-for="track in recommendedTracks" :key="track.id" :track="track" />
       </div>
 
       <div class="flex-align-center between w-90 gap-2">
@@ -36,10 +34,8 @@ onMounted(async () => {
         <a href="/playlists" class="">show all</a>
       </div>
 
-      <div class="flex">
-        <ul v-if="userPlaylists?.length">
-          <PlaylistCard v-for="playlist in userPlaylists" :key="playlist.id" :playlist="playlist" />
-        </ul>
+      <div class="flex flex-wrap" v-if="userPlaylists?.length">
+        <PlaylistCard v-for="playlist in userPlaylists" :key="playlist.id" :playlist="playlist" />
       </div>
 
       <div class="top-artists" v-if="topArtists?.length">
@@ -47,7 +43,7 @@ onMounted(async () => {
           <h2 class="heading">Top Artists</h2>
           <a href="/artists" class="">show all</a>
         </div>
-        <div class="flex-center gap-2 flex-wrap mt-2">
+        <div class="flex gap-2 flex-wrap mt-2">
           <ArtistCard v-for="artist in topArtists" :key="artist.id" :artist="artist" />
         </div>
       </div>
@@ -62,12 +58,10 @@ onMounted(async () => {
 
 <style scoped>
 .heading {
-  margin: 0 0 0 4rem;
   color: white;
   font-weight: 600;
   font-size: 2rem;
 }
-
 
 main {
   display: flex;
@@ -76,11 +70,10 @@ main {
   margin: 2rem 0;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   main {
-  padding: 0 2rem;
-
-}
+    padding: 0 2rem;
+  }
 }
 
 .frame {
@@ -91,6 +84,7 @@ main {
 ul {
   display: flex;
   flex-wrap: wrap;
+  margin: 0;
 }
 .hero {
   text-align: center;

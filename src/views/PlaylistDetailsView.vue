@@ -12,7 +12,6 @@ const { playTrack, setPlaylist, currentTrack } = usePlayerStore()
 
 const playTrackFromPlaylist = (track, index) => {
   setPlaylist(playlist.value.tracks.items)
-  console.log('Playlist:', playlist.value.tracks.items)
   playTrack(track, index)
 }
 

@@ -3,6 +3,7 @@ import { onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import IconSearch from './components/icons/IconSearch.vue'
 import MusePlayer from './components/MusePlayer.vue'
+import SideBar from './components/SideBar.vue'
 import { useAuth } from './composables/useAuth'
 
 const { login, spotifyCode, token, getToken, isAuthenticated, logout } = useAuth()
@@ -47,9 +48,15 @@ watch(
     </div>
   </header>
 
-  <main>
-    <RouterView />
-  </main>
+  <section class="flex">
+    <div class="sidebar">
+      <SideBar />
+    </div>
+
+    <div class="app-view">
+      <RouterView />
+    </div>
+  </section>
 
   <div class="player-container">
     <MusePlayer />
@@ -60,7 +67,8 @@ watch(
 header {
   background-color: #000;
   color: white;
-  padding: 20px 3rem;
+  padding: 0 3rem;
+  height: var(--app-header-height);
 }
 header,
 nav {
@@ -80,7 +88,7 @@ nav {
   bottom: 0;
   width: 100%;
   background: #000;
-  padding: 10px 20px;
+  padding: 0 20px;
 }
 
 .logo {
@@ -108,8 +116,20 @@ nav {
   border-radius: 5px;
 }
 
-main {
-  min-height: 100vh;
-  margin-bottom: 2rem;
+.sidebar {
+  background: #000;
+  width: 15%;
+  left: 0;
+  height: calc(100vh - (var(--app-header-height) + var(--app-player-height) - 40px));
+  overflow-y: scroll;
+  padding: 20px;
+}
+
+.app-view {
+  width: 85%;
+  padding: 20px;
+  height: calc(100vh - (var(--app-header-height) + var(--app-player-height) - 40px));
+  overflow: hidden;
+  overflow-y: scroll;
 }
 </style>

@@ -22,8 +22,8 @@ defineProps({
 }
 
 .artist-image {
-  width: 11rem;
-  height: 11rem;
+  width: 9rem;
+  height: 9rem;
   border-radius: 50%;
   margin: 0 auto;
   margin-bottom: 1rem;

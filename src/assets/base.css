@@ -50,6 +50,11 @@
   }
 }
 
+:root {
+  --app-header-height: 5rem;
+  --app-player-height: 5rem;
+}
+
 *,
 *::before,
 *::after {
@@ -105,7 +110,6 @@ body {
 .mt-3 {
   margin-top: 3rem;
 }
-
 
 .flex-align-center {
   display: flex;
@@ -169,4 +173,16 @@ body {
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.semi-bold{
+  font-weight: 500;
+}
+
+.uppercase{
+  text-transform: uppercase;
 }

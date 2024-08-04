@@ -40,8 +40,8 @@ defineProps({
 }
 
 .song-card__image img {
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
   border-radius: 0.5rem;
 }
