@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import IconSearch from './components/icons/IconSearch.vue'
 import MusePlayer from './components/MusePlayer.vue'
 import SideBar from './components/SideBar.vue'
 import { useAuth } from './composables/useAuth'
@@ -37,9 +36,6 @@ watch(
 
     <div class="wrapper">
       <nav>
-        <RouterLink to="/search">
-          <span class="flex-align-center gap-1"> Search <IconSearch /></span
-        ></RouterLink>
         <RouterLink to="/playlists">Playlists</RouterLink>
         <RouterLink to="/profile">Profile</RouterLink>
         <button @click="login" v-if="!isAuthenticated" class="log-in nav-btn">Log In</button>
