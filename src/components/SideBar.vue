@@ -1,5 +1,8 @@
 <script setup>
+//import { useSpotifyApi } from '../composables/useSpotifyApi'
 import IconSearch from './icons/IconSearch.vue'
+
+//const { createPlaylist } = useSpotifyApi()
 </script>
 
 <template>
@@ -11,17 +14,15 @@ import IconSearch from './icons/IconSearch.vue'
         ></RouterLink>
       </RouterLink>
       <h3 class="semi-bold uppercase">Playlists</h3>
-      <button class="btn">Create a Playlist</button>
+      <button class="btn" @click="open = true">Create a Playlist</button>
       <RouterLink to="/playlists">Playlists</RouterLink>
       <RouterLink to="/profile">Profile</RouterLink>
     </nav>
   </div>
 </template>
 
-
 <style scoped>
-
-button{
+button {
   background-color: #1db954;
   color: white;
   border: none;
@@ -29,6 +30,4 @@ button{
   border-radius: 0.25rem;
   cursor: pointer;
 }
-
-
 </style>

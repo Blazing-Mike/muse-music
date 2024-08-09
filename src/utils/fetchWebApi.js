@@ -2,21 +2,25 @@ import { useAuth } from '../composables/useAuth'
 
 const { token, logout } = useAuth()
 
-export const fetchWebApi = async (endpoint, method, params=null) => {
+export const fetchWebApi = async (endpoint, method, body = null) => {
   try {
     if (!token.value) {
       throw new Error('Access token is missing')
     }
-    const response = await fetch(`https://api.spotify.com/${endpoint}`, {
+
+    const fetchOptions = {
       method: method,
       headers: {
         Authorization: `Bearer ${token.value}`,
         'Content-Type': 'application/json'
       },
-      params: {
-        params
-      }
-    })
+    }
+
+    if (body) {
+      fetchOptions.body = JSON.stringify(body)
+    }
+
+    const response = await fetch(`https://api.spotify.com/${endpoint}`, fetchOptions)
     if (!response.ok) {
       const errorData = await response.json()
       if (response.status === 401) {

@@ -77,7 +77,7 @@ export const useAuth = () => {
   // Log in
   const login = async () => {
     const scope =
-      'user-read-private user-read-email playlist-read-private playlist-modify-public user-read-recently-played user-top-read user-follow-read user-library-modify user-library-read user-read-playback-state user-modify-playback-state user-read-currently-playing'
+      'user-read-private user-read-email playlist-read-private playlist-modify-public user-read-recently-played user-top-read user-follow-read user-library-modify user-library-read user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-modify-private playlist-modify-public'
     const authUrl = new URL('https://accounts.spotify.com/authorize')
 
     const generateRandomString = (length) => {

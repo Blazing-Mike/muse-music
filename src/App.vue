@@ -46,7 +46,7 @@ watch(
 
   <section class="flex">
     <div class="sidebar">
-      <SideBar />
+      <SideBar/>
     </div>
 
     <div class="app-view">

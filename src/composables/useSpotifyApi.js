@@ -53,12 +53,17 @@ export function useSpotifyApi() {
 
   const search = async (query) => {
     // Search for tracks on Spotify
-    const response = await fetchWebApi(`v1/search?q=${query.value}&type=artist,album,track`, 'GET');
+    const response = await fetchWebApi(`v1/search?q=${query.value}&type=artist,album,track`, 'GET')
     return response
   }
 
   const createPlaylist = async () => {
-    // Create a new playlist on Spotify
+    const response = await fetchWebApi('v1/users/mrv43akkvhtlsw9zvjv94zhm5/playlists', 'POST', {
+      name: 'My Awesome Playlist test',
+      description: 'This is the description of the playlist',
+      public: false
+    })
+    return response
   }
 
   return {
@@ -69,7 +74,7 @@ export function useSpotifyApi() {
     getUserPlaylists,
     getRecentlyPlayed,
     getRecommendedTracks,
-    getTopArtists, 
+    getTopArtists,
     search
   }
 }
