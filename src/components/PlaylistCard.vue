@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router';
 defineProps({
   playlist: {
     type: Object,
@@ -20,7 +20,11 @@ const viewPlaylist = (playlistId) => {
 <template>
   <div class="playlist-card">
     <div class="playlist-card__image">
-      <img :src="playlist.images[0].url" alt="Album cover" />
+      <div v-if="playlist.images" class="">
+        <img  :src="playlist.images[0].url" alt="Album cover" />
+        </div>
+    
+      <div v-if="playlist.images == null" class="image-box"></div>
     </div>
     <div class="playlist-card__info">
       <h3 @click="viewPlaylist(playlist.id)">{{ playlist.name }}</h3>
@@ -36,6 +40,13 @@ const viewPlaylist = (playlistId) => {
   padding: 1rem;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.image-box{
+  width: 160px;
+  height: 160px;
+  background-color: #333;
+  border-radius: 0.5rem;
 }
 
 .playlist-card__image {
